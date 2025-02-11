@@ -1,17 +1,39 @@
+import 'dart:io';
+
 void main() {
   // daniela jurado mat:22308051281069
   print('daniela jurado mat:22308051281069');
-  // Definimos una lista de números decimales (double)
-  List<double> numeros = [1.5, 2.0, 3.5, 4.0]; // Puedes cambiar estos valores
+  // Lista para almacenar los números ingresados por el usuario
+  List<double> numeros = [];
 
-  // Inicializamos una variable para almacenar el producto
-  double producto = 1.0; // Empezamos con 1 porque es el elemento neutro de la multiplicación
+  // Capturar la cantidad de números que el usuario desea ingresar
+  print('¿Cuántos números deseas ingresar?');
+  int cantidad = int.parse(stdin.readLineSync()!);
 
-  // Recorremos la lista y multiplicamos cada elemento
-  for (int i = 0; i < numeros.length; i++) {
-    producto *= numeros[i]; // Equivalente a: producto = producto * numeros[i]
+  // Capturar los números uno por uno
+  for (int i = 0; i < cantidad; i++) {
+    print('Ingresa el número ${i + 1}:');
+    double numero = double.parse(stdin.readLineSync()!);
+    numeros.add(numero); // Agregar el número a la lista
   }
 
-  // Mostramos el resultado
-  print("El producto de los números es: $producto");
+  // Calcular el producto de todos los elementos
+  double producto = calcularProducto(numeros);
+
+  // Imprimir el resultado
+  print('El producto de los elementos es: $producto');
+}
+
+double calcularProducto(List<double> numeros) {
+  if (numeros.isEmpty) {
+    return 0.0; // Si la lista está vacía, retornar 0
+  }
+
+  double producto = 1.0; // Inicializar el producto en 1
+
+  for (double numero in numeros) {
+    producto *= numero; // Multiplicar cada número al producto acumulado
+  }
+
+  return producto;
 }
